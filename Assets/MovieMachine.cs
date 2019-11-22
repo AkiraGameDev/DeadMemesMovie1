@@ -4,6 +4,81 @@ using UnityEngine;
 using UnityEngine.Video;
 
 public class MovieMachine : MonoBehaviour {
+    
+    [System.Serializable]
+    public class Node 
+    {   
+        [SerializeField]
+        public VideoClip nodeClip;
+
+        int numPaths;
+        Node[] paths = new Node[0];
+
+
+        //constructors for 1,2,3 nodes respectively
+        public Node(Node first, Node second, Node third)
+        {
+            numPaths = 3;
+            paths = new Node[numPaths];
+            paths[0] = first;
+            paths[1] = second;
+            paths[2] = third;
+        }
+        public Node(Node first, Node second)
+        {
+            numPaths = 2;
+            paths = new Node[numPaths];
+            paths[0] = first;
+            paths[1] = second;
+
+        }
+        public Node(Node first)
+        {
+            numPaths = 1;
+            paths = new Node[numPaths];
+            paths[0] = first;
+
+        }
+
+        //constructor for no paths
+        public Node()
+        {
+            numPaths = 0;
+        }
+    }
+
+    public static Node introNode;
+
+    public static Node bobRossNode = new Node(shrekNoNode, shrekYesNode);
+    public static Node shrekNoNode = new Node(shrekHeartBreakNode, shrekRunNode, shrekFightNode);
+    public static Node shrekYesNode = new Node(shrekRunNode,shrekFightNode,shrekFlirtNode);
+    public static Node shrekHeartBreakNode = new Node();
+    public static Node shrekRunNode; 
+    public static Node shrekFightNode;
+    public static Node shrekFlirtNode;
+
+    public static Node datBoiNode;
+    public static Node datBoiDeathNode;
+    //quicktime?
+    public static Node datBoitoArea51Node;
+    //quicktime fail result?
+    public static Node knightDeathNode;
+    public static Node area51Node;
+    public static Node cat51Node;
+    public static Node infinite51Node;
+    public static Node alienEndNode;
+    public static Node harambeNode;
+
+    public static Node floridaManNode;
+    public static Node shiaYesNode;
+    public static Node shiaNoNode;
+    public static Node shiaHelpNode;
+    public static Node shiaNoHelpNode;
+    public static Node shiaRunNode;
+    public static Node shiaFightNode;
+    
+
+
     public GameObject leftButton;
     public GameObject middleButton;
     public GameObject rightButton;
@@ -18,6 +93,9 @@ public class MovieMachine : MonoBehaviour {
     private CanvasRenderer leftTextRenderer;
     private CanvasRenderer middleTextRenderer;
     private CanvasRenderer rightTextRenderer;
+    private char[] stateString = new char[10] ;
+    private Node currentNode;
+    private int userInput;
 
     // Start is called before the first frame update
     void Start () {
@@ -41,13 +119,24 @@ public class MovieMachine : MonoBehaviour {
     // Update is called once per frame
     void Update () 
     {
+        //check for input from user
+        //if(inputDetected)
+        //{
+        //  userInput = userInputTransformer();
+        //  traverseNode(userInput)
+        //}
+
+    }
+
+    void UpdateState()
+    {
+
     }
 
     //check if current clip has finished playing
     bool ClipFinished (VideoPlayer videoPlayer) {
         if(videoPlayer.frame == (long)videoPlayer.frameCount)
         {
-            Debug.Log("Job's done!");
             return true;
         }
         else
@@ -96,7 +185,4 @@ public class MovieMachine : MonoBehaviour {
         }
         yield return null;
     }
-
-    //redirect buttons to load proper clips
-    void SetButtonDirection () { }
 }
