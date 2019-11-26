@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+//using wrmhlRead;
+
 
 public class MovieMachine : MonoBehaviour {
     
@@ -12,7 +14,7 @@ public class MovieMachine : MonoBehaviour {
         public VideoClip nodeClip;
 
         int numPaths;
-        Node[] paths = new Node[0];
+        Node[] paths; //= new Node[0];
 
 
         //constructors for 1,2,3 nodes respectively
@@ -47,7 +49,7 @@ public class MovieMachine : MonoBehaviour {
         }
     }
 
-    public static Node introNode;
+    public static Node introNode = new Node(bobRossNode, datBoiNode, floridaManNode);
 
     public static Node bobRossNode = new Node(shrekNoNode, shrekYesNode);
     public static Node shrekNoNode = new Node(shrekHeartBreakNode, shrekRunNode, shrekFightNode);
@@ -76,7 +78,37 @@ public class MovieMachine : MonoBehaviour {
     public static Node shiaNoHelpNode;
     public static Node shiaRunNode;
     public static Node shiaFightNode;
-    
+
+    public VideoClip introVideoClip;
+
+    public VideoClip bobRossVideoClip;
+    public VideoClip shrekNoVideoClip;
+    public VideoClip shrekYesVideoClip;
+    public VideoClip shrekHeartBreakVideoClip;
+    public VideoClip shrekRunVideoClip;
+    public VideoClip shrekFightVideoClip;
+    public VideoClip shrekFlirtVideoClip;
+
+    public VideoClip datBoiVideoClip;
+    public VideoClip datBoiDeathVideoClip;
+    //quicktime?
+    public VideoClip datBoitoArea51VideoClip;
+    //quicktime fail result?
+    public VideoClip knightDeathVideoClip;
+    public VideoClip area51VideoClip;
+    public VideoClip cat51VideoClip;
+    public VideoClip infinite51VideoClip;
+    public VideoClip alienEndVideoClip;
+    public VideoClip harambeVideoClip;
+
+    public VideoClip floridaManVideoClip;
+    public VideoClip shiaYesVideoClip;
+    public VideoClip shiaNoVideoClip;
+    public VideoClip shiaHelpVideoClip;
+    public VideoClip shiaNoHelpVideoClip;
+    public VideoClip shiaRunVideoClip;
+    public VideoClip shiaFightVideoClip;
+
 
 
     public GameObject leftButton;
@@ -93,12 +125,12 @@ public class MovieMachine : MonoBehaviour {
     private CanvasRenderer leftTextRenderer;
     private CanvasRenderer middleTextRenderer;
     private CanvasRenderer rightTextRenderer;
-    private char[] stateString = new char[10] ;
     private Node currentNode;
     private int userInput;
 
     // Start is called before the first frame update
     void Start () {
+        //wrmhl.Start();
         leftButtonRenderer = leftButton.GetComponent<CanvasRenderer>();
         middleButtonRenderer = middleButton.GetComponent<CanvasRenderer>();
         rightButtonRenderer = rightButton.GetComponent<CanvasRenderer>();
@@ -111,21 +143,13 @@ public class MovieMachine : MonoBehaviour {
         rightButtonRenderer.SetAlpha(0.0f);
         leftTextRenderer.SetAlpha(0.0f);
         middleTextRenderer.SetAlpha(0.0f);
-        rightTextRenderer.SetAlpha(0.0f);
-
-        //LoadClip(StartingClip)
+        rightTextRenderer.SetAlpha(0.0f); 
     }
 
     // Update is called once per frame
     void Update () 
     {
-        //check for input from user
-        //if(inputDetected)
-        //{
-        //  userInput = userInputTransformer();
-        //  traverseNode(userInput)
-        //}
-
+        if()
     }
 
     void UpdateState()
@@ -152,7 +176,7 @@ public class MovieMachine : MonoBehaviour {
     }
 
     //pre-loads clip when possible/necessary for polish
-    void PreLoadClip () { }
+    //void PreLoadClip () { }
 
     //makes buttons visible by setting alpha values, true=fade-in(on), false=fade out(off)
     void FadeObjects (bool direction, List<CanvasRenderer> objectList, float fadeLength) {
@@ -178,7 +202,7 @@ public class MovieMachine : MonoBehaviour {
     IEnumerator FadeOut (CanvasRenderer[] objectArray, int arraySize, float fadeLength) {
         for (float t = 0.0f; t < fadeLength; t += Time.deltaTime) {
             for (int i = 0; i < arraySize; i++) {
-                objectArray[i].SetAlpha(Mathf.Lerp(1, 0, t/fadeLength));
+                objectArray[i].SetAlpha(Mathf.Lerp(1, -1, t/fadeLength));
             }
             Debug.Log("Outputting 2!");
             yield return null;
