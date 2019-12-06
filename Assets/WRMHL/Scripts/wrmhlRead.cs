@@ -19,20 +19,22 @@ If you need speed and low latency take a look to wrmhlReadLatest.
 
 public class wrmhlRead : MonoBehaviour {
 
-	wrmhl myDevice = new wrmhl(); // wrmhl is the bridge beetwen your computer and hardware.
+	public wrmhl myDevice = new wrmhl(); // wrmhl is the bridge beetwen your computer and hardware.
 
 	[Tooltip("SerialPort of your device.")]
-	public string portName = "COM8";
+	public string portName = "COM3";
 
 	[Tooltip("Baudrate")]
-	public int baudRate = 250000;
+	public int baudRate = 9600;
 
 
 	[Tooltip("Timeout")]
-	public int ReadTimeout = 20;
+	public int ReadTimeout = 7200000;
 
 	[Tooltip("QueueLenght")]
 	public int QueueLenght = 1;
+
+	string output;
 
 	void Start () {
 		myDevice.set (portName, baudRate, ReadTimeout, QueueLenght); // This method set the communication with the following vars;
@@ -42,10 +44,16 @@ public class wrmhlRead : MonoBehaviour {
 
 	// Update is called once per frame
 	string Update () {
-		return myDevice.readQueue(); // myDevice.read() return the data coming from the device using thread.
+		output = myDevice.readQueue(); // myDevice.read() return the data coming from the device using thread.
+		return output;
 	}
 
 	void OnApplicationQuit() { // close the Thread and Serial Port
 		myDevice.close();
+	}
+	
+	public string arduinoOutput()
+	{
+		return output;
 	}
 }
