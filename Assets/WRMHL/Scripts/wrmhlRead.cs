@@ -51,6 +51,11 @@ public class wrmhlRead : MonoBehaviour {
 	void OnApplicationQuit() { // close the Thread and Serial Port
 		myDevice.close();
 	}
+
+	public void closeStuff()
+	{
+		myDevice.close();
+	}
 	
 	public string arduinoOutput()
 	{

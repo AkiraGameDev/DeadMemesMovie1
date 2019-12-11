@@ -150,309 +150,527 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introNode:
-    nodeClip: {fileID: 32900000, guid: d5a021fb09202344483b111222b6ef10, type: 3}
+    nodeClip: {fileID: 32900000, guid: 38884eb747cfab44ba16cecaf7fc216d, type: 3}
     buttonText:
     - Left
     - Middle
     - Right
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
-    paths:
-    - nodeClip: {fileID: 0}
-      buttonText: []
-      quicktime: 0
-      quicktimeNodeNum: 0
-      paths: []
-      numPaths: 0
-    - nodeClip: {fileID: 0}
-      buttonText: []
-      quicktime: 0
-      quicktimeNodeNum: 0
-      paths: []
-      numPaths: 0
-    - nodeClip: {fileID: 0}
-      buttonText: []
-      quicktime: 0
-      quicktimeNodeNum: 0
-      paths: []
-      numPaths: 0
-    numPaths: 3
+    paths: []
+    numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   bobRossNode:
-    nodeClip: {fileID: 32900000, guid: ac540b5b931410845974e710330d938f, type: 3}
+    nodeClip: {fileID: 32900000, guid: 0819e591cd17ad94593f8e9a618d5b54, type: 3}
     buttonText:
     - No
     - Yes
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
-  shrekNoNode:
-    nodeClip: {fileID: 0}
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
+  bobRossNoNode:
+    nodeClip: {fileID: 32900000, guid: e74cd77a8a4ea4742a9aa5808fec2cdd, type: 3}
+    buttonText: []
+    quicktime: 0
+    quicktime2: 0
+    quicktimeNodeNum: 0
+    paths: []
+    numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
+  bobRossYesNode:
+    nodeClip: {fileID: 32900000, guid: 38919b23b965e9d43b5e38f80a3e37c0, type: 3}
+    buttonText: []
+    quicktime: 0
+    quicktime2: 0
+    quicktimeNodeNum: 0
+    paths: []
+    numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
+  shrekIntroNoNode:
+    nodeClip: {fileID: 32900000, guid: 63dfad03c60538c42b46749fc2d13f30, type: 3}
     buttonText:
     - Flirt
     - Run
     - Fight
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
-  shrekYesNode:
-    nodeClip: {fileID: 0}
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
+  shrekIntroYesNode:
+    nodeClip: {fileID: 32900000, guid: 63dfad03c60538c42b46749fc2d13f30, type: 3}
     buttonText:
+    - Flirt
     - Run
     - Fight
-    - Flirt
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   shrekHeartBreakNode:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: 1c9a2d13eaffe1841b7e7a08bea406ce, type: 3}
     buttonText:
     - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   shrekRunNode:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: 9581fb1d8a96f764f80df4b96c612c48, type: 3}
     buttonText: []
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
-  shrekFightNode:
-    nodeClip: {fileID: 0}
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
+  shrekNoFightNode:
+    nodeClip: {fileID: 32900000, guid: a6c0f32a94e535b44b290bae4ca2b2d9, type: 3}
     buttonText:
     - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
+  shrekYesFightNode:
+    nodeClip: {fileID: 32900000, guid: a6c0f32a94e535b44b290bae4ca2b2d9, type: 3}
+    buttonText:
+    - Try Again
+    quicktime: 0
+    quicktime2: 0
+    quicktimeNodeNum: 0
+    paths: []
+    numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   shrekFlirtNode:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: 5f663bf349ff2994e9a36a883eb0d959, type: 3}
     buttonText: []
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
   datBoiNode:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: 69feb3e95e5e25940b23d56d8270e50a, type: 3}
     buttonText:
     - Run
     - Hide
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   datBoiDeathNode:
-    nodeClip: {fileID: 32900000, guid: f6c2c1567aa460f4f854a13132954614, type: 3}
+    nodeClip: {fileID: 32900000, guid: fc58960ac0eb93d4b93c95f1f95985d9, type: 3}
     buttonText:
     - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   datBoitoArea51Node:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: c168a7443400e0742941e651ba3de2e4, type: 3}
     buttonText:
     - Enter
     - Ignore
     quicktime: 0
+    quicktime2: 1
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 1
+    qtStart: 60
+    qtEnd: 0
   knightDeathNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 2532ce072de514c4395f9137074068e7, type: 3}
+    buttonText:
+    - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   area51Node:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: aee40536e4df0f94b8b09d4ca3c3ab94, type: 3}
+    buttonText:
+    - Left
+    - 'Middle '
+    - Right
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   cat51Node:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: e7412d5205914884c8303b677e492d0d, type: 3}
     buttonText: []
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
   infinite51Node:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: cd2712e2bdf44064e8f8de15fb1401c2, type: 3}
+    buttonText:
+    - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   alienEndNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 3195481a72d340a49a8b3bbcd1bb6837, type: 3}
+    buttonText:
+    - Run It Back?
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   harambeNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 49f59dec303d3044ab3788279b276361, type: 3}
+    buttonText:
+    - Run Away
+    - Save Him
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   harambeEndNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 70c0841b8f6877f4db4d787b256f31bd, type: 3}
+    buttonText:
+    - Run It Back?
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   harambeSaveNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 96ad14e9c0c853a429051f7f5dba3388, type: 3}
+    buttonText:
+    - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   floridaManNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 31a96e4862586e0488c40f85ad95ffad, type: 3}
+    buttonText:
+    - Yes
+    - No
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
+  floridaManYesNode:
+    nodeClip: {fileID: 32900000, guid: c8ddd325c4bd5624b829a20d5fbc156c, type: 3}
+    buttonText: []
+    quicktime: 0
+    quicktime2: 0
+    quicktimeNodeNum: 0
+    paths: []
+    numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
+  floridaManNoNode:
+    nodeClip: {fileID: 32900000, guid: 442bffb1c0267684caba649ce6329bc3, type: 3}
+    buttonText: []
+    quicktime: 0
+    quicktime2: 0
+    quicktimeNodeNum: 0
+    paths: []
+    numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
   shiaYesNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: f2ebdb72444a6ef429b2892e49634d3e, type: 3}
+    buttonText:
+    - Call for Help
+    - Run
+    - Fight
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   shiaNoNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: f2ebdb72444a6ef429b2892e49634d3e, type: 3}
+    buttonText:
+    - Run
+    - Fight
+    - Call for Help
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   shiaHelpNode:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: e523e805b74913944aa6ca8927793ac4, type: 3}
     buttonText: []
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
   shiaNoHelpNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: d1b01a4a7a8b06a4a8cae1ff4932b8e8, type: 3}
+    buttonText:
+    - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   shiaRunNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 82021a4a3e0acf641a5fd98bb8df60fd, type: 3}
+    buttonText:
+    - Try Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   shiaFightNode:
-    nodeClip: {fileID: 0}
+    nodeClip: {fileID: 32900000, guid: 4c2f17a18fa69ee49bdeb1067aed6ac3, type: 3}
     buttonText: []
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 1
+    qtStart: 0
+    qtEnd: 0
   fortniteNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 48532dc7128ee424b85edfbfce659953, type: 3}
+    buttonText:
+    - Sweat
+    - Camp
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   bannedDeathNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 356eee06349e45d4da618844e0298184, type: 3}
+    buttonText:
+    - Drop Again
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   dominanceQTNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
-    quicktime: 0
+    nodeClip: {fileID: 32900000, guid: 4a5b307b19211f1459e8e6020dff6fda, type: 3}
+    buttonText:
+    - Get Good?
+    - Be Top-Tier
+    quicktime: 1
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
-  getRektNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
-    quicktime: 0
-    quicktimeNodeNum: 0
-    paths: []
-    numPaths: 0
+    continuedNode: 0
+    qtStart: 222
+    qtEnd: 160
   dominanceQT2Node:
-    nodeClip: {fileID: 0}
-    buttonText: []
-    quicktime: 0
+    nodeClip: {fileID: 32900000, guid: f600cae778fd3bd45858883bc8297f06, type: 3}
+    buttonText:
+    - Embrace it next time...
+    - POWER!UP!
+    quicktime: 1
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
-  getSlappedNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
-    quicktime: 0
-    quicktimeNodeNum: 0
-    paths: []
-    numPaths: 0
+    continuedNode: 0
+    qtStart: 380
+    qtEnd: 310
   dominanceNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 5bdfd7e42f0dcdc4a859552dfa8a62ed, type: 3}
+    buttonText:
+    - Start Over
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   slenderTrollNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: fe7e755de29330f44ab6184d1b2f089a, type: 3}
+    buttonText:
+    - Sneak away
+    - Duel!
+    - Recall your training
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   sneakDeathNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: f9559c2dc17a42248b3159c018734bf8, type: 3}
+    buttonText:
+    - This isn't Metal Gear...
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   headEndNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: 32f1325ca2e84364b8baef9c780e7462, type: 3}
+    buttonText:
+    - Let me spend more time with Slendy
+    - Start over
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   danceDeathNode:
-    nodeClip: {fileID: 0}
-    buttonText: []
+    nodeClip: {fileID: 32900000, guid: c8b9cc4b1e9e0264c8df39f095a709f2, type: 3}
+    buttonText:
+    - You were never THAT good at dancing...
     quicktime: 0
+    quicktime2: 0
     quicktimeNodeNum: 0
     paths: []
     numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
+  startingNode:
+    nodeClip: {fileID: 0}
+    buttonText: []
+    quicktime: 0
+    quicktime2: 0
+    quicktimeNodeNum: 0
+    paths: []
+    numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
+  currentNode:
+    nodeClip: {fileID: 0}
+    buttonText: []
+    quicktime: 0
+    quicktime2: 0
+    quicktimeNodeNum: 0
+    paths: []
+    numPaths: 0
+    continuedNode: 0
+    qtStart: 0
+    qtEnd: 0
   leftButton: {fileID: 1170243892}
   middleButton: {fileID: 1442156642}
   rightButton: {fileID: 1883914363}
   leftText: {fileID: 967826759}
   middleText: {fileID: 1233252654}
   rightText: {fileID: 1462098898}
-  leftScript: {fileID: 0}
-  middleScript: {fileID: 0}
-  rightScript: {fileID: 0}
   videoPlayer1: {fileID: 1755322329}
 --- !u!4 &654844463
 Transform:
@@ -495,14 +713,14 @@ RectTransform:
   m_GameObject: {fileID: 967826759}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.94, y: 0.94, z: 0.94}
   m_Children: []
   m_Father: {fileID: 1170243893}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 15.04}
+  m_AnchoredPosition: {x: -0.3, y: 15.04}
   m_SizeDelta: {x: 112, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &967826761
@@ -634,6 +852,10 @@ PrefabInstance:
     - target: {fileID: 1053342500604988, guid: 2b0e7c930f0d5374184589cfa034236c, type: 3}
       propertyPath: m_Name
       value: wrmhlRead
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053342500604988, guid: 2b0e7c930f0d5374184589cfa034236c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4232700862553002, guid: 2b0e7c930f0d5374184589cfa034236c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -868,14 +1090,14 @@ RectTransform:
   m_GameObject: {fileID: 1233252654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.94, y: 0.94, z: 0.94}
   m_Children: []
   m_Father: {fileID: 1442156643}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 15.04}
+  m_AnchoredPosition: {x: -0.0090117045, y: 15.04}
   m_SizeDelta: {x: 112, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1233252656
@@ -1102,14 +1324,14 @@ RectTransform:
   m_GameObject: {fileID: 1462098898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.94, y: 0.94, z: 0.94}
   m_Children: []
   m_Father: {fileID: 1883914364}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 15.04}
+  m_AnchoredPosition: {x: -1.8, y: 15.04}
   m_SizeDelta: {x: 112, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462098900

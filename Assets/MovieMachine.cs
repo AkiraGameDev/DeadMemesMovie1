@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MovieMachine : MonoBehaviour {
     
@@ -12,9 +13,13 @@ public class MovieMachine : MonoBehaviour {
         public VideoClip nodeClip;
         public string[] buttonText;
         public bool quicktime;
+        public bool quicktime2;
         public int quicktimeNodeNum;
         public Node[] paths;
         public int numPaths;
+        public bool continuedNode;
+        public ulong qtStart;
+        public ulong qtEnd;
 
         //constructors for 1,2,3 nodes respectively
         public Node(Node first, Node second, Node third)
@@ -24,6 +29,7 @@ public class MovieMachine : MonoBehaviour {
             paths[0] = first;
             paths[1] = second;
             paths[2] = third;
+            this.SetNumPaths();
         }
         public Node(Node first, Node second)
         {
@@ -31,14 +37,14 @@ public class MovieMachine : MonoBehaviour {
             paths = new Node[numPaths];
             paths[0] = first;
             paths[1] = second;
-
+            this.SetNumPaths();
         }
         public Node(Node first)
         {
             numPaths = 1;
             paths = new Node[numPaths];
             paths[0] = first;
-
+            this.SetNumPaths();
         }
 
         //constructor for no paths
@@ -57,11 +63,14 @@ public class MovieMachine : MonoBehaviour {
     public Node  introNode;
     #region Bob Ross Nodes
         public Node  bobRossNode;
-        public Node  shrekNoNode;
-        public Node  shrekYesNode;
+        public Node  bobRossNoNode;
+        public Node  bobRossYesNode;
+        public Node  shrekIntroNoNode;
+        public Node  shrekIntroYesNode;
         public Node  shrekHeartBreakNode;
         public Node  shrekRunNode;
-        public Node  shrekFightNode;
+        public Node  shrekNoFightNode;
+        public Node  shrekYesFightNode;
         public Node  shrekFlirtNode;
     #endregion
 
@@ -83,6 +92,8 @@ public class MovieMachine : MonoBehaviour {
 
     #region Florida Man Branch
         public Node  floridaManNode;
+        public Node  floridaManYesNode;
+        public Node  floridaManNoNode;
         public Node  shiaYesNode;
         public Node  shiaNoNode;
         public Node  shiaHelpNode;
@@ -95,9 +106,7 @@ public class MovieMachine : MonoBehaviour {
         public Node fortniteNode;
         public Node bannedDeathNode;
         public Node dominanceQTNode;
-        public Node getRektNode;
         public Node dominanceQT2Node;
-        public Node getSlappedNode;
         public Node dominanceNode;
     #endregion
 
@@ -108,6 +117,9 @@ public class MovieMachine : MonoBehaviour {
         public Node  danceDeathNode;
     #endregion
 
+    public Node startingNode;
+    public Node currentNode;
+
 
     public GameObject leftButton;
     public GameObject middleButton;
@@ -115,12 +127,9 @@ public class MovieMachine : MonoBehaviour {
     public GameObject leftText;
     public GameObject middleText;
     public GameObject rightText;
+    
     GameObject arduino;
     wrmhlRead wrmhlReader;
-
-    public Text leftScript;
-    public Text middleScript;
-    public Text rightScript;
 
     public VideoPlayer videoPlayer1;
 
@@ -132,11 +141,11 @@ public class MovieMachine : MonoBehaviour {
     private CanvasRenderer rightTextRenderer;
 
     private char[] stateString = new char[10];
-    private Node currentNode;
     private int userInput;
     private bool notPlaying;
     private bool canInput = false;
-
+    bool restartingClip = false;
+    float buttonFourDown = 0.0f;
 
     // Start is called before the first frame update
     void Start () {
@@ -157,84 +166,54 @@ public class MovieMachine : MonoBehaviour {
         rightTextRenderer.SetAlpha(0.0f);
 
         introNode.paths = new Node[3] {bobRossNode, datBoiNode, floridaManNode};
-        introNode.SetNumPaths();
-        bobRossNode.paths = new Node[2] {shrekNoNode, shrekYesNode};
-        bobRossNode.SetNumPaths();
-        shrekNoNode.paths = new Node[3] {shrekHeartBreakNode, shrekRunNode, shrekFightNode};
-        shrekNoNode.SetNumPaths();
-        shrekYesNode.paths = new Node[3] {shrekRunNode, shrekFightNode, shrekFlirtNode};
-        shrekYesNode.SetNumPaths();
-        shrekHeartBreakNode.paths = new Node[1] {bobRossNode};
-        shrekHeartBreakNode.SetNumPaths();
+
+        bobRossNode.paths = new Node[2] {bobRossNoNode, bobRossYesNode};
+        bobRossNoNode.paths = new Node[1] {shrekIntroNoNode};
+        bobRossYesNode.paths = new Node[1] {shrekIntroYesNode};
+        shrekIntroNoNode.paths = new Node[3] {shrekHeartBreakNode, shrekRunNode, shrekNoFightNode};
+        shrekIntroYesNode.paths = new Node[3] {shrekFlirtNode, shrekRunNode, shrekYesFightNode};
+        shrekHeartBreakNode.paths = new Node[1] {shrekIntroNoNode};
         shrekRunNode.paths = new Node[1] {fortniteNode};
-        shrekRunNode.SetNumPaths();
-        shrekFightNode.paths = new Node[1] {bobRossNode};
-        shrekFightNode.SetNumPaths();
+        shrekNoFightNode.paths = new Node[1] {shrekIntroNoNode};
+        shrekYesFightNode.paths = new Node[1] {shrekIntroYesNode};
         shrekFlirtNode.paths = new Node[1] {slenderTrollNode};
-        shrekFlirtNode.SetNumPaths();
 
         datBoiNode.paths = new Node[2] {datBoiDeathNode, datBoitoArea51Node};
-        datBoiNode.SetNumPaths();
-        datBoiDeathNode.paths = new Node[1] {datBoiDeathNode};
-        datBoiDeathNode.SetNumPaths();
+        datBoiDeathNode.paths = new Node[1] {datBoiNode};
         datBoitoArea51Node.paths = new Node[3] {knightDeathNode, area51Node, harambeNode};
-        datBoitoArea51Node.SetNumPaths();
-        knightDeathNode.paths = new Node[1] {datBoiNode};
-        knightDeathNode.SetNumPaths();
+        knightDeathNode.paths = new Node[1] {datBoitoArea51Node};
         area51Node.paths = new Node[3] {infinite51Node, alienEndNode, cat51Node};
-        area51Node.SetNumPaths();
         cat51Node.paths = new Node[1] {area51Node};
-        cat51Node.SetNumPaths();
         infinite51Node.paths = new Node[1] {area51Node};
-        infinite51Node.SetNumPaths();
         alienEndNode.paths = new Node[1] {introNode};
-        alienEndNode.SetNumPaths();
         harambeNode.paths = new Node[2] {harambeEndNode, harambeSaveNode};
-        harambeNode.SetNumPaths();
         harambeEndNode.paths = new Node[2] {harambeNode, introNode};
-        harambeEndNode.SetNumPaths();
         harambeSaveNode.paths = new Node[1] {harambeNode};
-        harambeSaveNode.SetNumPaths();
 
-        floridaManNode.paths = new Node[2] {shiaYesNode, shiaNoNode};
-        floridaManNode.SetNumPaths();
+
+        floridaManNode.paths = new Node[2] {floridaManYesNode, floridaManNoNode};
+        floridaManYesNode.paths = new Node[1] {shiaYesNode};
+        floridaManNoNode.paths = new Node[1] {shiaNoNode};
         shiaYesNode.paths = new Node[3] {shiaHelpNode, shiaRunNode, shiaFightNode};
-        shiaYesNode.SetNumPaths();
         shiaNoNode.paths = new Node[3] {shiaRunNode, shiaFightNode, shiaNoHelpNode};
-        shiaNoNode.SetNumPaths();
         shiaHelpNode.paths = new Node[1] {fortniteNode};
-        shiaHelpNode.SetNumPaths();
         shiaNoHelpNode.paths = new Node[1] {floridaManNode};
-        shiaNoHelpNode.SetNumPaths();
         shiaRunNode.paths = new Node[1] {floridaManNode};
-        shiaRunNode.SetNumPaths();
         shiaFightNode.paths = new Node[1] {slenderTrollNode};
-        shiaFightNode.SetNumPaths();
         fortniteNode.paths = new Node[2] {bannedDeathNode,dominanceQTNode};
-        fortniteNode.SetNumPaths();
         bannedDeathNode.paths = new Node[1] {fortniteNode};
-        bannedDeathNode.SetNumPaths();
-        dominanceQTNode.paths = new Node[2] {getRektNode, dominanceQT2Node};
-        dominanceQTNode.SetNumPaths();
-        getRektNode.paths = new Node[1] {fortniteNode};
-        getRektNode.SetNumPaths();
-        dominanceQT2Node.paths = new Node[2] {getSlappedNode, dominanceNode};
-        dominanceQT2Node.SetNumPaths();
-        getSlappedNode.paths = new Node[1] {fortniteNode};
-        getSlappedNode.SetNumPaths();
-        dominanceNode.paths = new Node[1] {fortniteNode};
-        dominanceNode.SetNumPaths();
+        dominanceQTNode.paths = new Node[2] {dominanceQT2Node, dominanceQTNode};
+        dominanceQT2Node.paths = new Node[2] {dominanceNode, dominanceQTNode};
+        dominanceNode.paths = new Node[1] {introNode};
+
 
         slenderTrollNode.paths = new Node[3]{sneakDeathNode, headEndNode, danceDeathNode};
-        slenderTrollNode.SetNumPaths();
         sneakDeathNode.paths = new Node[1] {slenderTrollNode};
-        sneakDeathNode.SetNumPaths();
-        headEndNode.paths = new Node[1] {slenderTrollNode};
-        headEndNode.SetNumPaths();
+        headEndNode.paths = new Node[2] {slenderTrollNode, introNode};
         danceDeathNode.paths = new Node[1] {slenderTrollNode};
-        danceDeathNode.SetNumPaths();
 
-        currentNode = introNode;
+        startingNode = introNode;
+        currentNode = startingNode;
         videoPlayer1.clip = currentNode.nodeClip;
         notPlaying = true;
         videoPlayer1.Prepare();
@@ -253,18 +232,39 @@ public class MovieMachine : MonoBehaviour {
         }
 
         //fade in buttons x second(s) before end of clip
-        if(((long)videoPlayer1.frameCount-videoPlayer1.frame < 30) && !canInput)
+        if(((long)videoPlayer1.frameCount-videoPlayer1.frame < 30) && !canInput && !currentNode.quicktime)
         {
             canInput = true;
             FadeLogic(true);
+            Debug.Log("Can Input = True!");
         }
         
         CheckForInput();
+
+        if(Input.GetKeyDown("4") || wrmhlReader.arduinoOutput() == "3")
+        {
+            buttonFourDown += Time.deltaTime;
+            if(buttonFourDown >= 1.0f)
+            {
+                wrmhlReader.closeStuff();
+                wrmhlReader.closeStuff();
+                wrmhlReader.closeStuff();
+                wrmhlReader.closeStuff();
+                Destroy(wrmhlReader);
+                Destroy(arduino);
+                SceneManager.LoadScene("MainMenu",LoadSceneMode.Single);
+                buttonFourDown = 0.0f;
+            }
+        }
+        else
+        {
+            buttonFourDown = 0.0f;
+        }
     }
 
     //check if current clip has finished playing
     bool ClipFinished (VideoPlayer videoPlayer) {
-        if(videoPlayer.frame == (long)videoPlayer.frameCount)
+        if(videoPlayer.frame == (long)videoPlayer.frameCount-1)
         {
             return true;
         }
@@ -309,7 +309,7 @@ public class MovieMachine : MonoBehaviour {
         IEnumerator FadeOut (CanvasRenderer[] objectArray, int arraySize, float fadeLength) {
             for (float t = 0.0f; t < fadeLength; t += Time.deltaTime) {
                 for (int i = 0; i < arraySize; i++) {
-                    objectArray[i].SetAlpha(Mathf.Lerp(1, 0, t/fadeLength));
+                    objectArray[i].SetAlpha(Mathf.Lerp(1, -1, t/fadeLength));
                 }
                 yield return null;
             }
@@ -317,20 +317,20 @@ public class MovieMachine : MonoBehaviour {
         }
 
         void FadeLogic(bool direction){
-            if(currentNode.paths.Length == 3) 
+            if(currentNode.buttonText.Length == 3) 
             { 
                 leftText.GetComponentInChildren<Text>().text = currentNode.buttonText[0];
                 middleText.GetComponentInChildren<Text>().text = currentNode.buttonText[1];
                 rightText.GetComponentInChildren<Text>().text = currentNode.buttonText[2];
                 FadeObjects(direction, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, middleButtonRenderer, middleTextRenderer, rightButtonRenderer,rightTextRenderer}, 0.5f);
             }
-            else if(currentNode.paths.Length == 2) 
+            else if(currentNode.buttonText.Length == 2) 
             { 
                 leftText.GetComponentInChildren<Text>().text = currentNode.buttonText[0];
                 rightText.GetComponentInChildren<Text>().text = currentNode.buttonText[1];
                 FadeObjects(direction, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer,rightTextRenderer}, 0.5f);
             }
-            else if(currentNode.paths.Length == 1) 
+            else if(currentNode.buttonText.Length == 1) 
             {
                 middleText.GetComponentInChildren<Text>().text = currentNode.buttonText[0];
                 FadeObjects(direction, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.5f);
@@ -339,73 +339,197 @@ public class MovieMachine : MonoBehaviour {
     #endregion
 
     void CheckForInput(){
-        //check for input
-        if(canInput && wrmhlReader.arduinoOutput() == "0")
+        if(currentNode.continuedNode && ClipFinished(videoPlayer1))
         {
-            if(currentNode.numPaths == 3)
+            if(currentNode.quicktime2)
             {
-                FadeLogic(false);
-                currentNode = currentNode.paths[0];
-                videoPlayer1.clip = currentNode.nodeClip;
-                notPlaying = true;
-                videoPlayer1.Prepare();
-                canInput = false;
+                FadeObjects(false, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+            }
+            canInput = false;
+            notPlaying = true;
+            currentNode = currentNode.paths[0];
+            videoPlayer1.clip = currentNode.nodeClip;
+            videoPlayer1.Prepare();
+        }
+
+        if(currentNode.quicktime)
+        {
+            if((videoPlayer1.frame >= (long)(videoPlayer1.frameCount-currentNode.qtStart) && videoPlayer1.frame <= (long)(videoPlayer1.frameCount-currentNode.qtEnd)))
+            {
+                Debug.Log("Start Frame " + (videoPlayer1.frameCount-currentNode.qtStart));
+                Debug.Log("End Frame " + (videoPlayer1.frameCount-currentNode.qtEnd));
+                Debug.Log("Current Frame " + videoPlayer1.frame);
+                Debug.Log("Total Frames " + videoPlayer1.frameCount);
+                if(!canInput)
+                {
+                    canInput = true;
+                    middleText.GetComponentInChildren<Text>().text = currentNode.buttonText[1];
+                    FadeObjects(true, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                }
+                if(Input.GetKeyDown("2") || wrmhlReader.arduinoOutput() == "1")
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                    currentNode = currentNode.paths[0];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
             }
 
-            if(currentNode.numPaths == 2)
+            if(videoPlayer1.frame == (long)videoPlayer1.frameCount-(long)(currentNode.qtEnd-1))
             {
-                FadeLogic(false);
-                currentNode = currentNode.paths[0];
-                videoPlayer1.clip = currentNode.nodeClip;
-                notPlaying = true;
-                videoPlayer1.Prepare();
+                restartingClip = false;
+                Debug.Log("We should be fading out now!!!");
                 canInput = false;
+                FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+            }
+
+            if(ClipFinished(videoPlayer1))
+            {
+                if(!canInput && !restartingClip)
+                {
+                    Debug.Log("rendering restart");
+                    Debug.Log(videoPlayer1.frame);
+                    Debug.Log(canInput);
+                    canInput = true;
+                    middleText.GetComponentInChildren<Text>().text = currentNode.buttonText[0];
+                    FadeObjects(true, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.5f);
+                }
+
+                if(Input.GetKeyDown("2") || wrmhlReader.arduinoOutput() == "1")
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                    currentNode = currentNode.paths[1];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                    restartingClip = true;
+                }
             }
         }
 
-        if(canInput && wrmhlReader.arduinoOutput() == "1")
+        if(currentNode.quicktime2)
         {
-            if(currentNode.numPaths == 3)
+            if((videoPlayer1.frame >= (long)(videoPlayer1.frameCount-currentNode.qtStart) && videoPlayer1.frame <= (long)(videoPlayer1.frameCount-currentNode.qtEnd)))
             {
-                FadeLogic(false);
-                currentNode = currentNode.paths[1];
-                videoPlayer1.clip = currentNode.nodeClip;
-                notPlaying = true;
-                videoPlayer1.Prepare();
-                canInput = false;
+                Debug.Log("Start Frame " + (videoPlayer1.frameCount-currentNode.qtStart));
+                Debug.Log("End Frame " + (videoPlayer1.frameCount-currentNode.qtEnd));
+                Debug.Log("Current Frame " + videoPlayer1.frame);
+                Debug.Log("Total Frames " + videoPlayer1.frameCount);
+                if(!canInput)
+                {
+                    canInput = true;
+                    leftText.GetComponentInChildren<Text>().text = currentNode.buttonText[0];
+                    rightText.GetComponentInChildren<Text>().text = currentNode.buttonText[1];
+                    FadeObjects(true, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+                }
+                if(Input.GetKeyDown("1") || wrmhlReader.arduinoOutput() == "0")
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeObjects(false, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+                    currentNode = currentNode.paths[1];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
+                if(Input.GetKeyDown("3") || wrmhlReader.arduinoOutput() == "2")
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeObjects(false, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+                    currentNode = currentNode.paths[2];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
             }
 
-            if(currentNode.numPaths == 1)
+            if(videoPlayer1.frame == (long)videoPlayer1.frameCount-(long)(currentNode.qtEnd-1))
             {
-                FadeLogic(false);
-                currentNode = currentNode.paths[0];
-                videoPlayer1.clip = currentNode.nodeClip;
-                notPlaying = true;
-                videoPlayer1.Prepare();
+                restartingClip = false;
+                Debug.Log("We should be fading out now!!!");
                 canInput = false;
-            } 
+                FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+            }
         }
 
-        if(canInput && wrmhlReader.arduinoOutput() == "2")
+
+        if(canInput && !currentNode.quicktime && !currentNode.quicktime2)
         {
-            if(currentNode.numPaths == 3)
+            if(Input.GetKeyDown("1") || wrmhlReader.arduinoOutput() == "0")
             {
-                FadeLogic(false);
-                currentNode = currentNode.paths[2];
-                videoPlayer1.clip = currentNode.nodeClip;
-                notPlaying = true;
-                videoPlayer1.Prepare();
-                canInput = false;
+                Debug.Log("Pressed 1!");
+                if(currentNode.buttonText.Length == 3)
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeLogic(false);
+                    currentNode = currentNode.paths[0];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
+
+                if(currentNode.buttonText.Length == 2 && canInput)
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeLogic(false);
+                    currentNode = currentNode.paths[0];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
             }
-            if(currentNode.numPaths == 2)
+
+            if(Input.GetKeyDown("2") || wrmhlReader.arduinoOutput() == "1")
             {
-                FadeLogic(false);
-                currentNode = currentNode.paths[1];
-                videoPlayer1.clip = currentNode.nodeClip;
-                notPlaying = true;
-                videoPlayer1.Prepare();
-                canInput = false;
+                if(currentNode.buttonText.Length == 3)
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeLogic(false);
+                    currentNode = currentNode.paths[1];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
+
+                if(currentNode.buttonText.Length == 1 && canInput)
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeLogic(false);
+                    currentNode = currentNode.paths[0];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                } 
+            }
+
+            if(Input.GetKeyDown("3") || wrmhlReader.arduinoOutput() == "2")
+            {
+                if(currentNode.buttonText.Length == 3)
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeLogic(false);
+                    currentNode = currentNode.paths[2];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
+                if(currentNode.buttonText.Length == 2 && canInput)
+                {
+                    canInput = false;
+                    notPlaying = true;
+                    FadeLogic(false);
+                    currentNode = currentNode.paths[1];
+                    videoPlayer1.clip = currentNode.nodeClip;
+                    videoPlayer1.Prepare();
+                }
             }
         }
     }
+
+    void OnApplicationQuit() { // close the Thread and Serial Port
+		Destroy(arduino);
+        Destroy(wrmhlReader);
+	}
 }
