@@ -320,7 +320,7 @@ MonoBehaviour:
     paths: []
     numPaths: 0
     continuedNode: 1
-    qtStart: 60
+    qtStart: 90
     qtEnd: 0
   knightDeathNode:
     nodeClip: {fileID: 32900000, guid: 2532ce072de514c4395f9137074068e7, type: 3}
@@ -399,7 +399,8 @@ MonoBehaviour:
   harambeEndNode:
     nodeClip: {fileID: 32900000, guid: 70c0841b8f6877f4db4d787b256f31bd, type: 3}
     buttonText:
-    - Run It Back?
+    - I love Monkey
+    - Start Over
     quicktime: 0
     quicktime2: 0
     quicktimeNodeNum: 0
@@ -421,7 +422,7 @@ MonoBehaviour:
     qtStart: 0
     qtEnd: 0
   floridaManNode:
-    nodeClip: {fileID: 32900000, guid: 31a96e4862586e0488c40f85ad95ffad, type: 3}
+    nodeClip: {fileID: 32900000, guid: d069c27adfa4cb846b9d47807334f8f9, type: 3}
     buttonText:
     - Yes
     - No
@@ -919,7 +920,7 @@ PrefabInstance:
     - target: {fileID: 114925361610221660, guid: 2b0e7c930f0d5374184589cfa034236c,
         type: 3}
       propertyPath: ReadTimeout
-      value: 7200000
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b0e7c930f0d5374184589cfa034236c, type: 3}

@@ -343,7 +343,12 @@ public class MovieMachine : MonoBehaviour {
         {
             if(currentNode.quicktime2)
             {
-                FadeObjects(false, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+                leftButtonRenderer.SetAlpha(0.0f);
+                middleButtonRenderer.SetAlpha(0.0f);
+                rightButtonRenderer.SetAlpha(0.0f);
+                leftTextRenderer.SetAlpha(0.0f);
+                middleTextRenderer.SetAlpha(0.0f);
+                rightTextRenderer.SetAlpha(0.0f);
             }
             canInput = false;
             notPlaying = true;
@@ -364,13 +369,15 @@ public class MovieMachine : MonoBehaviour {
                 {
                     canInput = true;
                     middleText.GetComponentInChildren<Text>().text = currentNode.buttonText[1];
-                    FadeObjects(true, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                    middleButtonRenderer.SetAlpha(1.0f);
+                    middleTextRenderer.SetAlpha(1.0f);
                 }
                 if(Input.GetKeyDown("2") || wrmhlReader.arduinoOutput() == "1")
                 {
                     canInput = false;
                     notPlaying = true;
-                    FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                    middleButtonRenderer.SetAlpha(0.0f);
+                    middleTextRenderer.SetAlpha(0.0f);
                     currentNode = currentNode.paths[0];
                     videoPlayer1.clip = currentNode.nodeClip;
                     videoPlayer1.Prepare();
@@ -382,7 +389,7 @@ public class MovieMachine : MonoBehaviour {
                 restartingClip = false;
                 Debug.Log("We should be fading out now!!!");
                 canInput = false;
-                FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                
             }
 
             if(ClipFinished(videoPlayer1))
@@ -401,7 +408,8 @@ public class MovieMachine : MonoBehaviour {
                 {
                     canInput = false;
                     notPlaying = true;
-                    FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                    middleButtonRenderer.SetAlpha(0.0f);
+                    middleTextRenderer.SetAlpha(0.0f);
                     currentNode = currentNode.paths[1];
                     videoPlayer1.clip = currentNode.nodeClip;
                     videoPlayer1.Prepare();
@@ -414,6 +422,7 @@ public class MovieMachine : MonoBehaviour {
         {
             if((videoPlayer1.frame >= (long)(videoPlayer1.frameCount-currentNode.qtStart) && videoPlayer1.frame <= (long)(videoPlayer1.frameCount-currentNode.qtEnd)))
             {
+                Debug.Log("Quicktime 2");
                 Debug.Log("Start Frame " + (videoPlayer1.frameCount-currentNode.qtStart));
                 Debug.Log("End Frame " + (videoPlayer1.frameCount-currentNode.qtEnd));
                 Debug.Log("Current Frame " + videoPlayer1.frame);
@@ -423,13 +432,19 @@ public class MovieMachine : MonoBehaviour {
                     canInput = true;
                     leftText.GetComponentInChildren<Text>().text = currentNode.buttonText[0];
                     rightText.GetComponentInChildren<Text>().text = currentNode.buttonText[1];
-                    FadeObjects(true, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+                    leftButtonRenderer.SetAlpha(1.0f);
+                    rightButtonRenderer.SetAlpha(1.0f);
+                    leftTextRenderer.SetAlpha(1.0f);
+                    rightTextRenderer.SetAlpha(1.0f);
                 }
                 if(Input.GetKeyDown("1") || wrmhlReader.arduinoOutput() == "0")
                 {
                     canInput = false;
                     notPlaying = true;
-                    FadeObjects(false, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+                    leftButtonRenderer.SetAlpha(0.0f);
+                    rightButtonRenderer.SetAlpha(0.0f);
+                    leftTextRenderer.SetAlpha(0.0f);
+                    rightTextRenderer.SetAlpha(0.0f);
                     currentNode = currentNode.paths[1];
                     videoPlayer1.clip = currentNode.nodeClip;
                     videoPlayer1.Prepare();
@@ -438,7 +453,10 @@ public class MovieMachine : MonoBehaviour {
                 {
                     canInput = false;
                     notPlaying = true;
-                    FadeObjects(false, new List<CanvasRenderer>{leftButtonRenderer, leftTextRenderer, rightButtonRenderer, rightTextRenderer}, 0.01f);
+                    leftButtonRenderer.SetAlpha(0.0f);
+                    rightButtonRenderer.SetAlpha(0.0f);
+                    leftTextRenderer.SetAlpha(0.0f);
+                    rightTextRenderer.SetAlpha(0.0f);
                     currentNode = currentNode.paths[2];
                     videoPlayer1.clip = currentNode.nodeClip;
                     videoPlayer1.Prepare();
@@ -450,7 +468,10 @@ public class MovieMachine : MonoBehaviour {
                 restartingClip = false;
                 Debug.Log("We should be fading out now!!!");
                 canInput = false;
-                FadeObjects(false, new List<CanvasRenderer>{middleButtonRenderer, middleTextRenderer}, 0.01f);
+                leftButtonRenderer.SetAlpha(0.0f);
+                rightButtonRenderer.SetAlpha(0.0f);
+                leftTextRenderer.SetAlpha(0.0f);
+                rightTextRenderer.SetAlpha(0.0f);
             }
         }
 
